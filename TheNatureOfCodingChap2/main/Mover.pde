@@ -1,5 +1,4 @@
 class Mover{
-
   PVector location;
   PVector velocity;
   PVector acceleration;
@@ -13,6 +12,10 @@ class Mover{
     velocity = new PVector(random(-2,2)*2,random(-2,2)*2); 
   }  
   
+  void applyForce(PVector force){
+    acceleration = force;  
+  }
+  
   void update(){
     acceleration = PVector.random2D();
     acceleration.mult(random(2.0f));
@@ -22,6 +25,7 @@ class Mover{
       dir.mult(0.001f);
       acceleration = dir;
     }
+    
     velocity.add(acceleration);
     location.add(velocity);
     velocity.limit(speedLimit);
@@ -41,6 +45,5 @@ class Mover{
     if(location.y > height) location.y = 0;
     else if(location.y < 0) location.y = height;
   }
-
-
+  
 }
