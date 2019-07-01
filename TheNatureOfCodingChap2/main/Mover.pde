@@ -13,7 +13,8 @@ class Mover{
   }  
   
   void applyForce(PVector force){
-    acceleration = force;  
+    acceleration.mult(0);
+    acceleration.add(force);  
   }
   
   void update(){
