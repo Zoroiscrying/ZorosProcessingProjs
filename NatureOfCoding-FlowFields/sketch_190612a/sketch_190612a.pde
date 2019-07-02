@@ -33,6 +33,10 @@ class Particle {
   //属性
   PVector loc, speed, acc;
   color col;
+  float colA;
+  float colR;
+  float colG;
+  float colB;
   float rad;
   float maxVel = 1.0;
   float w = 500.0;
@@ -43,11 +47,16 @@ class Particle {
     loc   = _loc;
     speed = _speed;
     acc   = _acc;
+    colR = random(0,255);
+    colG = random(0,255);
+    colB = random(0,255);
+    colA = random(0,255);
   }
 
   Particle() {
     loc = new PVector(random(width*1.2), random(height));
     rad = random(TWO_PI);
+    colR = random(0,255);
     speed = new PVector(0, 0);
     acc = new PVector(cos(rad), sin(rad));
   }
@@ -78,13 +87,14 @@ class Particle {
   }
   //超出窗口就随机一个窗口内位置
   void checkEdges() {
-    if (loc.x<0 || loc.x>width || loc.y<0 || loc.y>height) {    
-      loc.x = random(width*1.2);
+    if (loc.x<0-0.2*width || loc.x>width*1.2 || loc.y<0 || loc.y>height) {    
+      loc.x = random(width,width*1.2);
       loc.y = random(height);
     }
   }
   //渲染
   void render() {
-    ellipse(loc.x, loc.y, 2, 2);
+    fill(colR,colG,colB,155);
+    ellipse(loc.x, loc.y, 5, 5);
   }
 }
