@@ -6,6 +6,7 @@ import org.jbox2d.dynamics.*;
 //Changed to Box2DProcessing
 Box2DProcessing box2d;
 Box box;
+Boundary boundary;
 
 // A list we'll use to track fixed objects
 ArrayList<Boundary> boundaries;
@@ -18,6 +19,7 @@ void setup(){
   box2d = new Box2DProcessing(this);
   box2d.createWorld();
   
+  boundary = new Boundary(width/2,height,width/2,10);
   box = new Box();
   
 }
@@ -30,4 +32,5 @@ void draw(){
   box2d.step();
   
   box.display();
+  boundary.display();
 }
