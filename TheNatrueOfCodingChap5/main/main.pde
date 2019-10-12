@@ -12,22 +12,20 @@ ArrayList<Boundary> boundaries;
 // A list for all of our rectangles
 ArrayList<Box> boxes;
 
-void setup(){
+void setup() {
   size(1280, 720);
-  background(255);
+  background(150);
   box2d = new Box2DProcessing(this);
   box2d.createWorld();
-  
   box = new Box();
-  
 }
 
 
-void draw(){
+void draw() {
   background(255);
   
   // We must always step through time!
   box2d.step();
-  
+
   box.display();
 }

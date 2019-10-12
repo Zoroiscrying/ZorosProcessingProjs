@@ -1,4 +1,5 @@
-void setup(){
+
+void setup(){//建立起 初始化
   size(600,600);
   background(255);
 }
