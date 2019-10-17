@@ -1,9 +1,15 @@
 float angle;
 float angleVel = 40;
+CustomParticle[] particles = new CustomParticle[100]; 
 
 void setup() {
   size(800, 600);
   background(255);
+  
+  for(int i = 0; i < 100; i ++){
+    particles[i] = new CustomParticle(random(0,2),random(0,2));
+  }
+  
 }
 
 void draw() {
@@ -59,6 +65,14 @@ void DrawBackground(float angle) {
   ellipse(posX2,posY2,height/2,height/2);
   fill(255,255);
   ellipse(posX2,posY2,height/6,height/6);
+  
+  noStroke();
+  fill(128,255);
+    
+  for(int i = 1; i < 100; i ++){
+    particles[i].Update();
+  }
+  
 }
 
 void DrawNose(float pivotY) {
