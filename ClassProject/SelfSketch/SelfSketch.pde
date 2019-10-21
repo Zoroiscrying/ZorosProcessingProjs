@@ -15,14 +15,15 @@ void setup() {
 void draw() {
   angleVel = lerp(angleVel, mouseX/50+20 ,0.1);
   angle = millis() * PI / angleVel;
+  float pivot = 100;
   DrawBackground(angle);
-  DrawHair(200);
-  DrawHead(200);
-  DrawNose(200);
-  DrawMouth(200);
-  DrawHat(200);
-  DrawHair(200);
-  DrawCloth(200);
+  DrawHair(pivot);
+  DrawHead(pivot);
+  DrawNose(pivot);
+  DrawMouth(pivot);
+  DrawHat(pivot);
+  DrawHair(pivot);
+  DrawCloth(pivot);
 }
 
 void DrawHead(float pivotY) {
@@ -39,9 +40,9 @@ void DrawHead(float pivotY) {
   curve
     (
     width/2 - 30, headCenter - 20, 
-    width/2 - 35, headCenter+80, 
-    width/2 + 35, headCenter+80, 
-    width/2 + 30, headCenter-20
+    width/2 - 35, headCenter + 80, 
+    width/2 + 35, headCenter + 80, 
+    width/2 + 30, headCenter - 20
     );
 }
 
