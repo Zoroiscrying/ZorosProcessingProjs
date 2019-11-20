@@ -1,13 +1,17 @@
 Mover mover;
-Mover movers[] = new Mover[10];
+int num = 5;
+Mover movers[] = new Mover[num];
+coreParticle core;
 
 void setup(){
+  frameRate(60);
   background(255);
   size(800,600);
   //smooth();
   smooth();
+  core = new coreParticle();
   mover = new Mover();
-  for(int i = 0; i < 10; i++){
+  for(int i = 0; i < num; i++){
     movers[i] = new Mover();
   }
 }
@@ -19,14 +23,17 @@ void draw(){
   fill(0,10);
   rect(0,0,width,height);
   fill(255,155);
-  mover.update();
-  mover.checkEdges();
-  mover.display();
-  for(int i  = 0;i < 10; i++){
-    movers[i].update();
-    movers[i].checkEdges();
-    movers[i].display();
+  
+  core.Apply();
+  
+  //mover.Apply();
+  //mover.Follow(core.location);
+  for(int i  = 0;i < num; i++){
+    movers[i].Apply();
+    movers[i].Follow(core.location);
   }
+  
+  
 
 }
 
