@@ -3,7 +3,7 @@ class CustomParticle{
   float posY;
   float velX;
   float velY;
-  float r = 10.0f;
+  float r = 5.0f;
   
   public CustomParticle(float velX, float velY){
     this.posX = random(0,width);
