@@ -1,5 +1,5 @@
 Mover m1;
-Liquid liquid;
+NoiseWindZone windZone;
 
 
 void setup(){
@@ -7,24 +7,20 @@ void setup(){
   smooth();
   background(255);
   m1 = new Mover();
-  liquid = new Liquid(0, height/2, width, height/2, 0.05);
+  windZone = new NoiseWindZone(width/2,height/2,new PVector(1,1), new PVector(100,100), 10.0f);
 }
 
 void draw(){
-  background(255);
-  PVector wind = new PVector(0,0);
-  PVector gravity = new PVector(0,1);
+  background(0);
+  //PVector wind = new PVector(0,0);
+  //PVector gravity = new PVector(0,2);
   //m1.applyForce(wind);
-  m1.applyForce(gravity);
+  //m1.applyForce(gravity);
   
-  if(m1.isInsideLiquid(liquid)){
-    liquid.dragMover(m1);
-  }
+  windZone.Display();
   
-  liquid.display();
-  
-  m1.update();
-  m1.checkEdges();
-  m1.display();
+  //m1.update();
+  //m1.checkEdges();
+  //m1.display();
   
 }

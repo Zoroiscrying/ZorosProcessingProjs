@@ -4,12 +4,12 @@ class Mover{
   PVector acceleration;
   float speedLimit = 10.0f;
   float size = 25.0f;
-  boolean followMouse = true;
+  boolean followMouse = false;
   
   Mover(){
     acceleration = new PVector(-0.001,0.01);
-    location = new PVector(random(width),random(height));
-    velocity = new PVector(random(-2,2)*2,random(-2,2)*2); 
+    location = new PVector(width/2,height);
+    velocity = new PVector(random(-2,2)*2,0.0f); 
   }  
   
   void applyForce(PVector force){
@@ -17,9 +17,20 @@ class Mover{
     acceleration.add(force);  
   }
   
+  boolean isInsideLiquid(Liquid liquid)
+  {
+    if(location.x < liquid.x + liquid.w
+    && location.x > liquid.x
+    && location.y < liquid.y + liquid.h
+    && location.y > liquid.y)
+    {
+      return true;
+    }else return false;
+  }
+  
   void update(){
-    acceleration = PVector.random2D();
-    acceleration.mult(random(2.0f));
+    //acceleration = PVector.random2D();
+    //acceleration.mult(random(0.0f));
     if(followMouse){
       PVector mouse = new PVector(mouseX, mouseY);
       PVector dir = PVector.sub(mouse, location);
@@ -35,7 +46,7 @@ class Mover{
   void display(){
     stroke(0,155);
     noStroke();
-    fill(175,155);
+    fill(150,155);
     ellipse(location.x,location.y,size,size);
   }
   
