@@ -12,13 +12,13 @@ class Liquid{
   
   void display(){
     noStroke();
-    fill(175);
+    fill(50);
     rect(x,y,w,h);
   }
   
   void dragMover(Mover m){
     float speed = m.velocity.mag();
-    float dragMagnitude = this.c * speed * speed;
+    float dragMagnitude = this.c * speed * speed + 0.0f;
     
     PVector drag = m.velocity.get();
     drag.mult(-1);
