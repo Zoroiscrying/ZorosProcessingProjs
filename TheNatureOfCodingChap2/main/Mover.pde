@@ -2,19 +2,37 @@ class Mover{
   PVector location;
   PVector velocity;
   PVector acceleration;
-  float speedLimit = 10.0f;
+  float speedLimit = 5.0f;
   float size = 25.0f;
   boolean followMouse = false;
+  
+  color moverColor;
   
   Mover(){
     acceleration = new PVector(-0.001,0.01);
     location = new PVector(width/2,height);
     velocity = new PVector(random(-2,2)*2,0.0f); 
+    moverColor = color(0,0,0,0);
   }  
   
+  Mover(PVector location, PVector velocity, float size){
+    this.location = location.copy();
+    this.velocity = velocity.copy();
+    this.size = size;
+    acceleration = new PVector(-0.001,0.01);
+    moverColor = color(0,0,0,0);
+  }
+  
   void applyForce(PVector force){
-    acceleration.mult(0);
     acceleration.add(force);  
+  }
+  
+  void Reset(PVector location, boolean changeColor, boolean changeSize)
+  {
+    this.location = location;
+    if(changeColor) this.moverColor = color(random(80,255),random(80,255),random(80,255),155);
+    if(changeSize) this.size = random(10,20);
+    
   }
   
   boolean isInsideLiquid(Liquid liquid)
@@ -41,13 +59,18 @@ class Mover{
     velocity.add(acceleration);
     location.add(velocity);
     velocity.limit(speedLimit);
+    acceleration.mult(0);
   }
   
   void display(){
-    stroke(0,155);
+    pushStyle();
+    
     noStroke();
     fill(150,155);
+    fill(moverColor);
     ellipse(location.x,location.y,size,size);
+    
+    popStyle();
   }
   
   void checkEdges(){

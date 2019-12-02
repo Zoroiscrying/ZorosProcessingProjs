@@ -1,0 +1,6 @@
+class NoiseLineRenderer extends LineRenderer
+{
+  
+  
+  
+}
