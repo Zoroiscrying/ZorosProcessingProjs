@@ -1,12 +1,17 @@
 int blockNumHori = 25;
+int blockNumHoriTarget;
 float circleRaidus = 20.0f;
 
 void setup() {
   size(1600, 960);
   background(255);
+  blockNumHoriTarget = blockNumHori;
 }
 
 void draw() {
+  
+  blockNumHori = round(lerp(float(blockNumHori), float(blockNumHoriTarget), 0.1f));
+  println(blockNumHori);
   fill(255, 50);
   noStroke();
   rect(0, 0, width, height);
@@ -34,4 +39,15 @@ void draw() {
       //circle(horiPos,vertPos,circleRaidus);
     }
   }
+}
+
+void keyPressed()
+{
+  blockNumHoriTarget = round(random(10, 100));
+  println(blockNumHoriTarget);
+}
+
+void mouseMoved()
+{
+  blockNumHoriTarget = round(map(mouseX, 0, width, 10, 100));
 }

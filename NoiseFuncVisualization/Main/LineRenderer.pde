@@ -3,12 +3,15 @@ class LineRenderer
   ArrayList<PVector> points;
   color lineColor;
   float lineWidth;
+  float noiseMultiplier = 40.0f;
+  float ossilationAmpMult = 10.0f;
+  float noiseScale = 40.0f;
 
   LineRenderer()
   {
     points = new ArrayList<PVector>();
     lineColor = color(255, 120);
-    lineWidth = 1.0f;
+    lineWidth = random(1.0f, 1.5f);
   }
 
   LineRenderer(float lineWidth, color lineColor)
@@ -38,7 +41,10 @@ class LineRenderer
     for (PVector point : points)
     {
       //sin(millis()/500.0f * PI + point.y)* 20
-      vertex(point.x, point.y + noise(point.x + millis()/10000000.0f*width, point.y)*20 + sin(millis()/500.0f * PI + point.x)* 10);
+      float offsetY = point.y;
+      offsetY += noise(point.x/100.0f + millis()*width/5000000.0f, point.y/100.0f + millis()*width/3000000.0f )*120;
+      offsetY += sin(millis()/1000.0f * PI + ((point.x+point.y)/PI/width)*40)* 2f;
+      vertex(point.x, offsetY);
     }
     endShape(LINE);
     popStyle();

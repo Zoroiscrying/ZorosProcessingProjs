@@ -3,11 +3,11 @@ float offsetX = 0;
 
 void setup()
 {
-  size(800, 600);
+  size(1600, 900);
   background(0);
   smooth();
   lines = new ArrayList<LineRenderer>();
-  for (int j = 0; j <= height; j += 15)
+  for (int j = 0; j <= height; j += 40)
   {
     LineRenderer line = new LineRenderer();
 
@@ -24,7 +24,7 @@ void setup()
 void draw()
 {
   noStroke();
-  fill(0,120);
+  fill(0,60);
   rect(0,0,width,height);
   
   for (LineRenderer line : lines) line.Display();
