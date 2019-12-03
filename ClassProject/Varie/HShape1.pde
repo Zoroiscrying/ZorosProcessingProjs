@@ -42,7 +42,7 @@ class HShape1 extends HShape {
       int randomStartIndex = round(second()/2);
       if(!this.presetColorsList) thisHSBColor = PVector.add(this.HSBGroupColorFrom ,PVector.sub(this.HSBGroupColorTo,this.HSBGroupColorFrom).mult(abs(BANDNormalized)));
       else thisHSBColor = this.presetColors.get((i + randomStartIndex) % (presetColors.size()-1));
-      println(thisHSBColor.x);
+      //println(thisHSBColor.x);
       switch(i%3)
       {
       case 0:

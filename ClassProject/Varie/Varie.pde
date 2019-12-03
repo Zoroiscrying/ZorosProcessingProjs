@@ -15,8 +15,8 @@ int nextExpandTime = 16;
 
 void settings() 
 {
-  //size(800, 800, P3D);
-  fullScreen(P3D);
+  size(800, 800, P3D);
+  //fullScreen(P3D);
   smooth(8);
 }
 
@@ -26,9 +26,8 @@ void setup() {
   colorMode(HSB, 360, 100, 100, 100);
 
   cam = new PeasyCam(this, 600);
-  leap = new LeapMotion(this);
+  //leap = new LeapMotion(this);
   MP = new MusicProcess();
-  HFL = new HFLeap();
   timer = new StopWatchTimer();
 
   RG.init(this);
@@ -92,6 +91,7 @@ void setup() {
   }
   hshapes.add(new HShape1("Song-06.svg",shapeColorPresets6));
 
+  HFL = new HFLeap();
   timer.start();
 }
 
@@ -113,7 +113,10 @@ float BANDNormalized = 0;
 
 void draw() {
   background(360);
+  
   HFL.update();
+  
+  
   TZ = map(HFL.handPos.z, -1, 1, 1000, -1000);
   translate(0, 0, TZ);
   //rotateZ(HALF_PI + radians(HFL.handPitch));
@@ -121,7 +124,7 @@ void draw() {
   //rotateX(HALF_PI + radians(HFL.handRoll));
   //RZ+=0.01;
   this.passedTimeMillis += timer.deltaTime();
-  println(this.passedTimeMillis / 1000 + "Next Expand:" + this.nextExpandTime);
+  //println(this.passedTimeMillis / 1000 + "Next Expand:" + this.nextExpandTime);
   
   if (this.passedTimeMillis / 1000 >= this.nextExpandTime) 
   {
@@ -144,15 +147,7 @@ void draw() {
     currentH.show();
   }
   
-  String txt_fps = String.format(" [frame %d]   [fps %6.2f]", frameCount, frameRate);
-  surface.setTitle(txt_fps);
-  //HFL.draw();
-}
-
-
-
-void keyPressed() {
-  //if (keyCode == UP)
-  //h1.ChangeOneGroupScale(round(random(0, 7)), random(0f, 1f));
-  //if (keyCode == DOWN);
+  //String txt_fps = String.format(" [frame %d]   [fps %6.2f]", frameCount, frameRate);
+  //surface.setTitle(txt_fps);
+  HFL.draw();
 }
