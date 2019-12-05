@@ -29,3 +29,8 @@ void draw()
   
   for (LineRenderer line : lines) line.Display();
 }
+
+void keyPressed()
+{
+  if(keyCode == TAB) saveFrame("screen.png");
+}
