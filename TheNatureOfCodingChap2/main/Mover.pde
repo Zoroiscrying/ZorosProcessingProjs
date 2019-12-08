@@ -2,7 +2,7 @@ class Mover{
   PVector location;
   PVector velocity;
   PVector acceleration;
-  float speedLimit = 5.0f;
+  float speedLimit = 4.0f;
   float size = 25.0f;
   boolean followMouse = false;
   
@@ -30,20 +30,10 @@ class Mover{
   void Reset(PVector location, boolean changeColor, boolean changeSize)
   {
     this.location = location;
+    this.velocity = PVector.random2D().mult(5.0f);
     if(changeColor) this.moverColor = color(random(80,255),random(80,255),random(80,255),155);
-    if(changeSize) this.size = random(10,20);
+    if(changeSize) this.size = random(20,40);
     
-  }
-  
-  boolean isInsideLiquid(Liquid liquid)
-  {
-    if(location.x < liquid.x + liquid.w
-    && location.x > liquid.x
-    && location.y < liquid.y + liquid.h
-    && location.y > liquid.y)
-    {
-      return true;
-    }else return false;
   }
   
   void update(){

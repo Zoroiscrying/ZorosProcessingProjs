@@ -6,11 +6,12 @@ GravityPuller gravityPuller;
 PVector resetLocation;
 float millisTimeInterval = 50.0f;
 float millisTimerNextThresh;
-int particleNum = 200;
+int particleNum = 300;
 int activateIndex = 0;
 
 void setup(){
-  size(1280,720);
+  size(1600,900);
+  frameRate(60);
   smooth();
   background(255);
   moversList = new ArrayList<Mover>();
@@ -19,7 +20,8 @@ void setup(){
     moversList.add(new Mover(new PVector(0+100,height-100),new PVector(random(0, 3),random(0,3)), random(10,20)));
   }
   windZone = new NoiseWindZone(0,height, new PVector(1,1), new PVector(800,90), 1.0f);
-  gravityPuller = new GravityPuller(width/4*3 , height/4, 400, 1.0f);
+  
+  gravityPuller = new GravityPuller(width/4*3 , height/4, height/4*3, 1.1f);
   millisTimerNextThresh = millisTimeInterval;
   resetLocation = new PVector(0+100,height-100);
 }
@@ -42,8 +44,8 @@ void draw(){
   PVector wind = new PVector(0.1f,0.1f);
   //PVector gravity = new PVector(0,2);
   
-  //windZone.Update();
-  //gravityPuller.Update();
+  windZone.Update();
+  gravityPuller.Update();
   
   for(Mover mover : moversList)
   {
@@ -55,4 +57,9 @@ void draw(){
     mover.display();
   }
   
+}
+
+void keyPressed()
+{
+  if(keyCode == TAB) saveFrame("screenShot.png");
 }

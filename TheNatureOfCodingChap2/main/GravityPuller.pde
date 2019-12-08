@@ -46,7 +46,14 @@ class GravityPuller{
     float r = relativeDir.mag();
     if(r < zoneRadius){
       //println(r);
-      mover.applyForce(relativeDir.copy().normalize().mult(-this.pullStrength).add(PVector.random2D().mult(1f)));
+      float deg = 360.0*noise(
+      mover.location.x/width, 
+      mover.location.y/height, 
+      millis()/10000.0);
+
+      float rad=radians(deg);
+      //.add(new PVector(cos(rad), sin(rad)).mult(1.0f)
+      mover.applyForce(relativeDir.copy().normalize().mult(-this.pullStrength).add(new PVector(cos(rad), sin(rad)).mult(0.5f)));
       return true;
     }
     else return false;

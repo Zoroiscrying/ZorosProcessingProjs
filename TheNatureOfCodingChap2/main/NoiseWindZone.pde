@@ -64,7 +64,14 @@ class NoiseWindZone{
     float r = relativeDir.mag();
     if(r < zoneArcRadius && angle < angleMax && angle > angleMin){
       //println(r);
-      mover.applyForce(relativeDir.copy().normalize().mult(this.windStrength).add(PVector.random2D().mult(1f)));
+      float deg = 360.0*noise(
+      mover.location.x/width, 
+      mover.location.y/height, 
+      millis()/10000.0);
+
+      float rad=radians(deg);
+      //.add(new PVector(cos(rad), sin(rad)).mult(0.2f)
+      mover.applyForce(relativeDir.copy().mult(this.windStrength/100.0f).add(new PVector(cos(rad), sin(rad)).mult(0.4f)));
       return true;
     }
     else return false;
