@@ -28,10 +28,13 @@ void draw() {
     for (int j = 0; j<blockNumVert; j++) {
       float horiPos = (float(i)+0.5f) * blockWidth;
       float vertPos = (float(j)+0.5f) * blockWidth;
+      //rectMode(CENTER);
+      //fill(255*noise(i/blockWidth,j/blockWidth));
+      //rect(horiPos,vertPos,blockWidth,blockWidth);
       float angle = radians(horiPos +vertPos)/8 + (millis()/180.0f * PI / 8);
       float rx = blockWidth/3 * cos(angle);
       float ry = blockWidth/3 * sin(angle);
-      fill(255, 255, 0, 255);
+      fill(255, 0, 0, 255);
       circle(horiPos+rx, vertPos+ry, blockWidth/3);
       fill(0, 255, 0.50);
       if (ry > 0) circle(horiPos, vertPos, ry);
@@ -43,11 +46,11 @@ void draw() {
 
 void keyPressed()
 {
-  blockNumHoriTarget = round(random(10, 100));
-  println(blockNumHoriTarget);
+  //blockNumHoriTarget = round(random(10, 100));
+  //println(blockNumHoriTarget);
 }
 
 void mouseMoved()
 {
-  blockNumHoriTarget = round(map(mouseX, 0, width, 10, 100));
+  blockNumHoriTarget = round(map(mouseX, 0, width, 10, 30));
 }
