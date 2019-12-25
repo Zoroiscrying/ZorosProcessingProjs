@@ -15,8 +15,8 @@ int nextExpandTime = 16;
 
 void settings() 
 {
-  //size(800, 800, P3D);
-  fullScreen(P3D);
+  size(800, 800, P3D);
+  //fullScreen(P3D);
   smooth(8);
 }
 
