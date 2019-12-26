@@ -68,6 +68,24 @@ class ShapeOne
     bottomRight.x += led/2;
     bottomRight.y -= wid/2;
     
+    if (chaos > 0.5) {
+      topLeft.y += chaos/2;
+      bottomRight.y += chaos/2;
+    }
+    else {
+      bottomLeft.y += chaos/2;
+      topRight.y += chaos/2;
+    }
+
+    if (sharp > 0.5) {
+      topLeft.x += sharp/2;
+      bottomRight.x += sharp/2;
+    }
+    else {
+      bottomLeft.x += sharp/2;
+      topRight.x += sharp/2;
+    }
+
     noStroke();
     fill(col);
     

@@ -7,8 +7,9 @@ class ChangingOne
   ChangingOne()
   {
     states = new ArrayList<State>();
-    this.states.add(new StageOne());
-    this.states.add(new StageTwo());
+    //this.states.add(new StageOne());
+    //this.states.add(new StageTwo());
+    this.states.add(new StageThree(60));
     stateMachine = new StateMachine(states.get(0));
   }
   
@@ -240,9 +241,87 @@ class StageTwo extends State
 
 class StageThree extends State
 {
-    void Enter(){}
+  float cellSize;
+  int horiNum;
+  int vertNum;
+
+  float leanMax;
+  float chaosMax;
+  float sharpMax;
+  float poportion;
+
+  ArrayList<ShapeOne> lines;
+
   
-  void Update(){}
+  StageThree(float cellSize)
+  {
+    this.cellSize = cellSize;
+    horiNum = round(width/cellSize);
+    vertNum = round(height/cellSize);
+    lines = new ArrayList<ShapeOne>();
+  }
+
+  void Enter()
+  {
+    println("Enter Stage Three.");
+    chaosMax = cellSize*random(0.01, 0.08);
+    sharpMax = cellSize*random(0.05, 0.2);
+    poportion = random(0.05, 0.1);
+    leanMax = PI/3;
+    lines = new ArrayList<ShapeOne>();
+    for(int i = 0 ; i < horiNum; i ++)
+    {
+      for(int j = 0 ; j < vertNum; j ++)
+      {
+        PVector newPos = new PVector();
+        newPos.x = cellSize/2 + i*cellSize;
+        newPos.y = cellSize/2 + j*cellSize;
+       println("Generate One Line, POS:" + newPos);
+        float lineLength = random(cellSize/4, cellSize*0.9);
+        float lineWidth = lineLength * random(poportion * 0.7 , poportion * 2);
+        lines.add(new ShapeOne(
+          newPos, 
+          lineLength,
+          lineWidth,
+          random(-leanMax,leanMax),
+          random(-chaosMax, chaosMax),
+          random(-sharpMax, sharpMax),
+          color(255,255,255,255)));
+      }
+    }
+
+  }
   
-  void Exit(){}
+  void Update()
+  {
+    for(ShapeOne line : lines)
+    {
+      line.RenderWithLerp();
+      //strokeWeight(5);
+      //stroke(255,255,255,255);
+      //point(line.pos.x,line.pos.y);
+    }
+    
+    if(keyPressed)
+    {
+      ChangeTargetValues();
+    }
+  }
+  
+  void ChangeTargetValues()
+  {
+    for(ShapeOne line : lines)
+    {
+      line.targetLed =  random(cellSize/4, cellSize*0.9);
+      line.targetWid = line.targetLed * random(poportion * 0.7 , poportion * 2);
+      line.targetLeanDegree = random(-leanMax,leanMax);
+      line.targetChaos = random(-chaosMax, chaosMax);
+      line.targetSharp = random(-sharpMax, sharpMax);
+    }
+    
+  }
+  
+  void Exit(){
+
+  }
 }
