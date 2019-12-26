@@ -1,14 +1,15 @@
 int n = 200;
 RainControlSystem rain;
 float bgAlpha = 255;
+color moonColor;
 
 void setup() {
   colorMode(HSB, 360, 100, 100);
-  size(1280, 720);
+  size(1600 , 900);
   stroke(0, 100, 255);
   smooth();
   frameRate(60);
-
+  moonColor = color(0, 0, 100);
   rain = new RainControlSystem(n);
 }
 
@@ -28,7 +29,8 @@ void DrawBackground()
   pushMatrix();
   pushStyle();
   noStroke();
-  fill(0, 0, 100, bgAlpha);
+
+  fill(moonColor, bgAlpha);
   float xOffset = width/2 - cos(millis()/40000f*PI)*height;
   float yOffset = height - sin(millis()/40000f*PI)*height;
   ellipse(xOffset, yOffset, 200, 200);
@@ -40,7 +42,11 @@ void DrawBackground()
 void keyPressed() {
   if (keyCode == UP) rain.ChangeSpdMultiplier(rain.rainDrops.get(0).velocityMultiplier * 2f);
   else if (keyCode == DOWN) rain.ChangeSpdMultiplier(rain.rainDrops.get(0).velocityMultiplier * 0.5f);
-  else if (keyCode == LEFT) rain.ChangeDropColor(color(random(0, 360), random(50, 100), 100, 255));
+  else if (keyCode == LEFT)
+  {
+    rain.ChangeDropColor(color(random(0, 360), random(50, 100), 100, 255));
+    moonColor = color(random(0, 360), random(50, 100), 100, 255);
+  }
 
   if (keyCode == RIGHT) rain.ApplyForce(new PVector(random(-2, 2), random(-2, 2)));
   if (keyCode == TAB) 
@@ -50,11 +56,13 @@ void keyPressed() {
       rain.DropSnow();
       bgAlpha = 255;
       //print("SNOW");
-    }else if (rain.envType == EnvType.SNOW)
+    } else if (rain.envType == EnvType.SNOW)
     {
       rain.DropRain();
       bgAlpha = 128;
       //print("RAIN!");
     }
   }
+  
+  if(keyCode == SHIFT) saveFrame("Screen.png");
 }

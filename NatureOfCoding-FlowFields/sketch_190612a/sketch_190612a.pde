@@ -1,10 +1,10 @@
 //粒子数
-int num = 1000;
+int num = 2000;
 //存放粒子的数组
 Particle[] particles = new Particle[num];
 
 void setup() {
-  size(1024, 728, P3D);
+  size(1600, 900, P3D);
   noStroke();
   //迭代生成所有粒子
   for (int i=0; i<num; i++) {
@@ -95,6 +95,11 @@ class Particle {
   //渲染
   void render() {
     fill(colR,colG,colB,155);
-    ellipse(loc.x, loc.y, 5, 5);
+    ellipse(loc.x, loc.y, 3, 3);
   }
+}
+
+void keyPressed()
+{
+  if(key == TAB) saveFrame("screen.png");
 }
