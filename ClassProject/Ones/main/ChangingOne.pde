@@ -276,7 +276,8 @@ class StageThree extends State
         PVector newPos = new PVector();
         newPos.x = cellSize/2 + i*cellSize;
         newPos.y = cellSize/2 + j*cellSize;
-       println("Generate One Line, POS:" + newPos);
+        newPos.z = noise(newPos.x) * 100;
+       //println("Generate One Line, POS:" + newPos);
         float lineLength = random(cellSize/4, cellSize*0.9);
         float lineWidth = lineLength * random(poportion * 0.7 , poportion * 2);
         lines.add(new ShapeOne(
@@ -312,11 +313,14 @@ class StageThree extends State
   {
     for(ShapeOne line : lines)
     {
-      line.targetLed =  random(cellSize/4, cellSize*0.9);
+      float noiseValue1 = noise(line.pos.x + millis()/1000,line.pos.y + millis()/1000);
+      float degree = noiseValue1 * PI*2;
+      line.targetPos.z = noise(line.pos.x + millis()/float(1000)) * 30 - 15;
+      line.targetLed =  random(cellSize*0.1, cellSize*2);
       line.targetWid = line.targetLed * random(poportion * 0.7 , poportion * 2);
-      line.targetLeanDegree = random(-leanMax,leanMax);
       line.targetChaos = random(-chaosMax, chaosMax);
       line.targetSharp = random(-sharpMax, sharpMax);
+      line.targetCol = round( random(0.0,1.0) * float(color(255,255,255)));
     }
     
   }

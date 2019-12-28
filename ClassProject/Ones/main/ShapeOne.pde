@@ -38,7 +38,11 @@ class ShapeOne
   
   void RenderWithLerp()
   {
+    float noiseValue1 = noise(pos.x + millis()/float(2000),pos.y + millis()/float(2000));
+    float degree = noiseValue1 * PI;
     DoLerpOnce(0.1f);
+    this.targetLeanDegree = degree;
+    this.leanDegree = degree;
     Render();
   }
   
@@ -47,7 +51,7 @@ class ShapeOne
     pushStyle();
     pushMatrix();
     
-    translate(pos.x,pos.y);
+    translate(pos.x,pos.y,pos.z);
     rotateZ(leanDegree);
     
     //four points in object space.
