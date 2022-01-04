@@ -1,2 +1,2 @@
 # ZorosProcessingProjs
-My processing projects to gain excecises on generative art. Peace!
+My processing projects to gain excecises on generative art.
